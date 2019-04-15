@@ -1,0 +1,109 @@
+/*List for media*/
+
+$size: ("sm": 500px, 'md': 768px, 'md_p': 850px,);
+
+
+/*Common variables*/
+
+$main_background: rgba(136, 136, 136, 0.4);
+$main_font: Roboto, serif;
+$button_color: #59574b;
+
+/*Common mixin*/
+
+@mixin gradient_background($color: yellow, $direction:to right){
+  background-image: linear-gradient($direction,
+          lighten($color, 20%),
+          lighten($color, 40%),
+          lighten($color, 60%));
+
+}
+
+@mixin gradient_background_darken($color: yellow, $direction:to right){
+  background-image: linear-gradient($direction,
+          darken($color, 10%),
+          darken($color, 50%),
+          darken($color, 80%));
+}
+
+html {
+  height: 100% ;
+}
+
+body {
+  width: 100%;
+  @include gradient_background_darken($main_background);
+  font-family: $main_font;
+  margin: 0 0 20px 0;
+}
+
+h1 {
+  padding: 20px 0 10px 0;
+  text-align: center;
+  font-size: 2.5em;
+}
+
+p {
+  font-family: "Roboto Slab", serif;
+  margin: 0;
+}
+
+@mixin button-reset{
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+button{
+  @include button-reset;
+}
+
+.btn {
+   text-align: center;
+   margin: 2px 0;
+   border: solid 1px transparent;
+   border-radius: 4px;
+   padding: 0.5em 1em;
+   color: honeydew;
+   background-color: $button_color;
+
+  display: block;
+}
+
+.btn-sbm{
+  @extend .btn;
+  width: 80%;
+  max-width: 300px;
+}
+
+.btn-rst{
+  @extend .btn;
+  width: 40%;
+  max-width: 150px;
+}
+
+
+
+.row {
+  display: flex;
+  &-colunm{
+    display: flex;
+    flex-flow: column;
+  }
+
+  &-between{
+    justify-content: space-between;
+  }
+}
+
+.column{
+  @for $i from 1 through 12{
+    &-#{$i}{
+      flex: $i;
+    }
+  }
+}
+

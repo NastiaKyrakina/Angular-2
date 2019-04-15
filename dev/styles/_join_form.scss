@@ -1,0 +1,115 @@
+.join-form.row{
+  @media screen and (max-width:450px){
+    flex-flow: column;
+  }
+}
+
+fieldset .row{
+  @media screen and (max-width:450px){
+    flex-flow: column;
+  }
+}
+.about{
+  margin: 0 5px;
+  border-right: 2px dashed #1d3232;
+  display: flex;
+  flex-flow: column;
+  img{
+    display:block;
+    max-width: 300px;
+    margin: auto;
+
+  }
+}
+
+form{
+  margin: 0 7%;
+  padding: 0 10px;
+}
+
+label, fieldset{
+  margin-top: 1em;
+  padding: 1px;
+}
+
+label, legend{
+  font-size: 1.1em;
+}
+fieldset{
+  padding: 10px;
+}
+
+input[type='text'],
+input[type='email'] {
+  display: block;
+
+  padding: 0.4em;
+  font-size: 1.2em;
+  color: darkslategrey;
+  font-weight: bold;
+}
+
+.elem-name{
+  display: flex;
+  flex-flow: column;
+
+  input[type='text'] {
+    text-transform: uppercase;
+  }
+
+ }
+
+
+fieldset label{
+  margin: 20px;
+  padding: 10px;
+
+}
+
+%decorator{
+  margin: 3px 5px -4px 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  border: 1px solid #636371;
+}
+
+%mark{
+  content: "";
+  display: block;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  left: 2px;
+  background: #413548;
+}
+
+input[type='radio'],
+input[type='checkbox']
+{
+display: none;
+}
+
+.decorated-radio{
+  @extend %decorator;
+  border-radius: 50%;
+
+}
+
+input[type='radio']:checked + .decorated-radio::before{
+  @extend %mark;
+  border-radius: 50%;
+}
+
+.decorated-check{
+  @extend %decorator;
+  border-radius: 2px;
+}
+
+input[type='checkbox']:checked + .decorated-check::before{
+  @extend %mark;
+  border-radius: 2px;
+}
+

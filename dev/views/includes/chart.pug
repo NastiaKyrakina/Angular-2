@@ -1,0 +1,24 @@
+- var users_progress={'1':['task resolved', 'project resolved'], '2':['critical bag fixed', 'bag fixed'], '3':['world save','villains defeated']}
+
+mixin displey_chart(values)
+    - for(let i=1;i<=values.length;i++){
+        div(class="inline chart-" + i title=values[i - 1])
+            span=values[i - 1]
+    - }
+
+h1#progress Our progress
+.charts.row
+    .column-1
+        each user in users
+            .name=user.name
+    .chart.column-11
+        each user in users
+            .row-colunm(class="user user-" + user.id)
+                each value, key  in users_progress
+                    .div(class="chart-line line-" + key)
+                        +displey_chart(value)
+
+        .axis
+            - for(let i=1;i<10;i++){
+                div(class="point num-" + i)
+            -}

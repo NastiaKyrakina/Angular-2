@@ -1,0 +1,119 @@
+
+/*Profiles*/
+
+$profile_background: white;
+$job_background: rgb(159, 153, 133);
+$name_fonts: 'Bree Serif', Georgia, serif;
+$font_size: 1.3em;
+$max_img_size: 90%;
+
+@media(max-width: map_get($size,'sm')) {
+  $max_img_size: 70%;
+  $font_size: 1.6em;
+}
+
+.profiles{
+  justify-content: center;
+  margin: 15px;
+
+  @media(max-width: map_get($size,'md')) {
+      flex-flow: column;
+  }
+}
+
+.profile {
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  background-color: $profile_background;
+  margin: 20px;
+  padding: 15px 0 0 0;
+  box-shadow: 2px 1px 1px black;
+
+  .name {
+    text-align: center;
+    font-family: $name_fonts;
+    font-size: $font_size;
+    margin-bottom: 5px;
+
+  }
+
+  .job {
+    padding: 10px 20px;
+    margin-top: auto;
+    border-top: 1px dashed black;
+    background-color: $job_background;
+  }
+
+  figure {
+
+    text-align: center;
+
+    .wallaper {
+      position: relative;
+
+      img {
+        max-width: $max_img_size;
+        min-width: 200px;
+        @media(max-width: map_get($size, 'md_p')) {
+          max-width: $max_img_size/1.5;
+          border-radius: 7px;
+        }
+      }
+
+      /*picture frame from scotch*/
+      .sketch {
+        position: absolute;
+        width: 30px;
+        height: 10px;
+        background-color: rgb(255, 219, 93);
+
+        @media(max-width: map_get($size, 'md_p')) {
+          display: none;
+        }
+      }
+
+      .top {
+        top: 0.2%;
+      }
+
+      .bottom {
+        bottom: 3%;
+      }
+
+      .left {
+        left: 2.5%;
+        box-shadow: 1px 1px 2px black;
+      }
+
+      .right {
+        right: 2.5%;
+        box-shadow: -1px 1px 2px black;
+      }
+
+      .left.top {
+        transform: skew(-15deg, 0) rotate(-45deg);
+      }
+
+      .right.top {
+        transform: skew(15deg, 0) rotate(45deg);
+      }
+
+      .right.bottom {
+        transform: skew(-15deg, 0) rotate(-45deg);
+      }
+
+      .left.bottom {
+        transform: skew(15deg, 0) rotate(45deg);
+      }
+
+    }
+
+    figcaption {
+      display: block;
+      margin: 10px 0;
+    }
+  }
+
+}
+

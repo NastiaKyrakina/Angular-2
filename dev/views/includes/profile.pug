@@ -1,0 +1,14 @@
+h1#team Our Team
+.profiles.row
+    each user in users
+        .profile
+            .name=user.name
+            figure
+                .wallaper
+                    img(src='img/' + user.img)
+                    .sketch.left.top
+                    .sketch.right.top
+                    .sketch.left.bottom
+                    .sketch.right.bottom
+                figcaption=user.moto
+            .job Position: #{user.job}

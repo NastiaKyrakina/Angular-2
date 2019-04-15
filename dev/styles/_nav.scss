@@ -1,0 +1,104 @@
+$base_menu_color: #7b7b8c;
+$text_color: darken(#7b7b8c, 50%);
+$hover_link_color: saturate(darken($base_menu_color, 10%), 80%);
+$header_color: saturate(darken($base_menu_color, 10%), 80%);
+
+%space{
+  padding: 5px 10px 10px 10px;
+}
+
+header {
+  width: 100%;
+  @include gradient_background($base_menu_color);
+  @extend %space;
+  h1, h2{
+    text-align: center;
+
+  }
+
+  h1{
+    padding: 0;
+    font-size: 1.1em;
+    color: $header_color;
+  }
+  h2{
+    color: #1d3232;
+  }
+
+  div:first-of-type{
+    padding-left: 10px;
+  }
+
+  img{
+    float: left;
+    width: 50px;
+  }
+  @media(max-width: map_get($size, "md")) {
+
+    &.row {
+      margin: 0;
+      padding: 0;
+      flex-flow: column;
+    }
+
+    &.row div:first-of-type {
+      display: none;
+    }
+  }
+}
+
+li {
+  list-style: none;
+}
+
+nav {
+  width: 100%;
+  text-align: right;
+  @media(max-width: map_get($size, "md")) {
+    text-align: center;
+    margin-top: 10px;
+
+  }
+
+  li{
+    display: inline-block;
+    padding: 5px;
+
+    &:first-of-type{
+        display: none;
+     }
+
+  }
+
+  a{
+    text-decoration: none;
+    color: $text_color;
+
+    font-size: large;
+    @media(max-width: map_get($size, "md")){
+      font-size: larger;
+      border-bottom: 2px solid #7b7b8c;
+
+    }
+    &:visited{
+      color:  lighten($text_color, 40%);
+      text-shadow: 1px 0 3px #59574b;
+    }
+
+    &:hover{
+      color: $hover_link_color;
+      text-shadow: 1px 0 3px #fff716;
+    }
+
+    &:active{
+      color:  desaturate($hover_link_color, 80%);
+      text-shadow: 1px 0 3px #59574b;
+    }
+
+
+  }
+}
+
+
+
+

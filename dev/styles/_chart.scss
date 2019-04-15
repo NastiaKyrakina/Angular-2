@@ -1,0 +1,239 @@
+$chart-block-size: 80;
+$pointer_count: 9;
+$elem-num: 10px*($chart-block-size/100px);
+
+$users_count: 3;
+$categories_count: 3;
+$sub_count: 2;
+
+$user_chart_height: 30%;
+
+@debug map_get($size,'md_p');
+
+@mixin chart_width(){
+  width: $chart-block-size;
+  @media screen and (max-width:map_get($size,'md_p')){
+    $new_w: -10+$chart-block-size;
+    width: #{$new_w}vw;
+  }
+
+}
+
+//Создание данных для каждого пользователя
+@function get_random_data_list($users:3, $categories:3, $sub:3, $limit:100){
+ $users_data: ();
+  @for $i from 1 through $users {
+    $data:();
+    @for $j from 1 through $categories {
+      $list: ();
+      @for $k from 1 through $sub {
+        $list: append($list, random($limit));
+      }
+      $data: append($data, $list);
+    }
+    $users_data:append($users_data, $data);
+  }
+  @return $users_data;
+}
+//сумма элементов списка
+@function sum($data){
+  $sum:0;
+  @for $i from 1 through length($data){
+    $sum:$sum+nth($data, $i);
+  }
+  @return $sum;
+}
+//максимальная сума данных для графика (для вычисления максимальной длины графика)
+@function max_sum($data){
+  $data-list:();
+
+  @for $i from 1 through length($data){
+    $categories: nth($data, $i);
+    @for $j from 1 through length($categories){
+      $data-list:append($data-list, sum(nth($categories,$j)));
+    }
+  }
+  @return max($data-list...);
+}
+//создание набора данных
+$data: get_random_data_list($users_count, $categories_count, $sub_count);
+
+//получение максимальной длины рядка данных
+$max_data: max_sum($data);
+
+@debug $max_data;
+@debug $data;
+
+@mixin user_block($p:15px, $p2:5px){
+  height: $user_chart_height;
+  padding: $p $p2;
+  @media screen and (max-width:map_get($size,'sm')){
+    width: $user_chart_height;
+
+  }
+}
+
+.charts .name{
+
+  @include user_block(10px, 15px);
+  word-wrap: break-word;
+  @media screen and (max-width:map_get($size,'sm')){
+    padding: 15px 10px;
+
+  }
+}
+
+.chart{
+
+  @media screen and (max-width:map_get($size,'sm')){
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.user{
+  @include user_block;
+}
+.charts {
+  border: 1px solid #000033;
+  margin: 20px;
+  padding: 10px;
+
+  .name {
+      text-align: center;
+      transform: rotate(-90deg);
+  }
+
+}
+
+
+
+.chart-line{
+  background-color: darken(blue, 40%);
+  @include chart_width();
+  height: 20px;
+
+  @media screen and (max-width:map_get($size,'sm')){
+    display: flex;
+    flex-flow: column;
+    height: #{$chart-block-size}vh;
+    width:  20px;
+  }
+}
+
+.inline {
+  span{
+    display: none;
+  }
+
+}
+
+$chart_color: orange;
+@for $i from 1 through $users_count{
+  .user-#{$i} {
+    $categories: nth($data, $i);
+
+    @for $j from 1 through $categories_count {
+
+      $sub_categ: nth($categories, $j);
+      $color: adjust-hue($chart_color, 70*$j);
+
+      .line-#{$j} {
+
+        @for $k from 1 through $sub_count {
+          $elem: nth($sub_categ, $k);
+
+          $width: ($elem*$chart-block-size)/$max_data;
+          @media screen and (max-width:map_get($size,'md_p')){
+            $width: ($elem*(-10+$chart-block-size))/$max_data;
+          }
+          .chart-#{$k} {
+            display: inline-block;
+            width: #{$width}vw;
+            background-color: $color;
+
+            &:hover {
+              background-color: lighten($color, 20%);
+
+              span{
+                display: inline;
+              }
+            }
+
+            @media screen and (max-width: map_get($size,'sm')) {
+              display: block;
+              height: #{$width}vh;
+              width: 20px;
+            }
+
+            &:after {
+              content: '#{$elem}';
+              padding-left: 2%;
+            }
+
+
+          }
+          }
+        }
+      }
+    }
+  }
+
+
+
+@media screen and (max-width:map_get($size,'sm')){
+  .charts{
+    &.row {
+      flex-flow: column;
+    }
+
+    .name {
+        display: inline-block;
+        text-align: center;
+        transform: none;
+      }
+    }
+    .chart .row-colunm{
+  flex-flow: row;
+  }
+
+}
+
+/*change the with*/
+
+.axis{
+  @media screen and (max-width:map_get($size,'sm')){
+    display: none;
+  }
+  .point{
+    visibility: visible;
+    display: inline-block;
+    width: 10vw;
+    height: 10px;
+    border-right: 1px solid black;
+  }
+
+  .point:last-of-type{
+    border: none;
+  }
+}
+
+/*change the number of points*/
+@for $i from 1 to $pointer_count{
+  $step: ($max_data/8);
+  .num-#{$i}:after {
+    @if($i==1) {
+      visibility: hidden;
+    }
+    $number: floor($step*(-1+$i));
+    content: '#{$number}';
+    display: inline-block;
+    padding: 12px 5px 0 0;
+  }
+
+}
+
+.numeration{
+ @include chart_width();
+  margin-top: 20px;
+}

@@ -1,0 +1,52 @@
+h1#join Join Us!
+h2 Let's create great things together!
+
+.join-form.row
+    .about.column-1
+        p Hello! Do you want to save the world? Or two?
+        p So join us and we can do it together!
+            img(src='img/sword.png')
+    .column-2
+        form(method='POST' action='./').row-colunm
+            .elem-name
+                label(for='fname') Last Name
+                input(type='text' id='fname' placeholder='FIRST NAME')
+            label(for='fname') First Name
+            input(type='text' id='lname' placeholder='LAST NAME')
+            label(for='fname') Email
+            input(type='email' id='email' placeholder='example.email@gmail.com')
+            fieldset
+                legend Describe yourself in one word
+                label
+                    input(type='radio' name='group1' id='1' value='1')
+                    span.decorated-radio
+                    | Workaholic
+                label
+                    input(type='radio' name='group1' id='2' value='2')
+                    span.decorated-radio
+                    | Codeholic
+                label
+                    input(type='radio' name='group1' id='3' value='3')
+                    span.decorated-radio
+                    | Happyholic
+
+            fieldset
+                legend What do want do with us?
+                label
+                    input(type='checkbox' name='group1' id='4' value='1')
+                    span.decorated-check
+                    | Save world's
+                label
+                    input(type='checkbox' name='group1' id='5' value='2')
+                    span.decorated-check
+                    | Creat program
+                label
+                    input(type='checkbox' name='group1' id='6' value='3')
+                    span.decorated-check
+                    | Break programs
+
+            .row.row-between
+                button(type='submit').btn-sbm
+                    | Join!
+                button(type='reset').btn-rst
+                    | Reset
