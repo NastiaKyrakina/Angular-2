@@ -1,2 +1,4 @@
-# pug_sass_template
-pug sass gulp
+# work two
+Страница: https://nastiakyrakina.github.io/work-two/
+
+Запуск проекта, выполняеться командой gulp wath
