@@ -1,8 +1,9 @@
 h1#join Join Us!
-h2 Let's create great things together!
+
 
 .join-form.row
     .about.column-1
+        h2 Let's create great things together!
         p Hello! Do you want to save the world? Or two?
         p So join us and we can do it together!
             img(src='img/sword.png')
@@ -17,33 +18,35 @@ h2 Let's create great things together!
             input(type='email' id='email' placeholder='example.email@gmail.com')
             fieldset
                 legend Describe yourself in one word
-                label
-                    input(type='radio' name='group1' id='1' value='1')
-                    span.decorated-radio
-                    | Workaholic
-                label
-                    input(type='radio' name='group1' id='2' value='2')
-                    span.decorated-radio
-                    | Codeholic
-                label
-                    input(type='radio' name='group1' id='3' value='3')
-                    span.decorated-radio
-                    | Happyholic
+                .row-wrap
+                    label
+                        input(type='radio' name='group1' id='1' value='1')
+                        span.decorated-radio
+                        | Workaholic
+                    label
+                        input(type='radio' name='group1' id='2' value='2')
+                        span.decorated-radio
+                        | Codeholic
+                    label
+                        input(type='radio' name='group1' id='3' value='3')
+                        span.decorated-radio
+                        | Happyholic
 
             fieldset
-                legend What do want do with us?
-                label
-                    input(type='checkbox' name='group1' id='4' value='1')
-                    span.decorated-check
-                    | Save world's
-                label
-                    input(type='checkbox' name='group1' id='5' value='2')
-                    span.decorated-check
-                    | Creat program
-                label
-                    input(type='checkbox' name='group1' id='6' value='3')
-                    span.decorated-check
-                    | Break programs
+                legend What would you like to do as a team member?
+                .row-wrap
+                    label
+                        input(type='checkbox' name='group1' id='4' value='1')
+                        span.decorated-check
+                        | Save worlds
+                    label
+                        input(type='checkbox' name='group1' id='5' value='2')
+                        span.decorated-check
+                        | Create programs
+                    label
+                        input(type='checkbox' name='group1' id='6' value='3')
+                        span.decorated-check
+                        | Break programs
 
             .row.row-between
                 button(type='submit').btn-sbm

@@ -7,11 +7,14 @@ $categories_count: 3;
 $sub_count: 2;
 
 $user_chart_height: 30%;
+$users_progress:(('task resolved', 'project resolved'),
+                ('critical bug fixed', 'bug fixed'),
+                ('worlds saved','villains defeated'));
 
 @debug map_get($size,'md_p');
 
 @mixin chart_width(){
-  width: $chart-block-size;
+  width: #{$chart-block-size}vw;
   @media screen and (max-width:map_get($size,'md_p')){
     $new_w: -10+$chart-block-size;
     width: #{$new_w}vw;
@@ -61,8 +64,7 @@ $data: get_random_data_list($users_count, $categories_count, $sub_count);
 //получение максимальной длины рядка данных
 $max_data: max_sum($data);
 
-@debug $max_data;
-@debug $data;
+
 
 @mixin user_block($p:15px, $p2:5px){
   height: $user_chart_height;
@@ -139,7 +141,7 @@ $chart_color: orange;
       $color: adjust-hue($chart_color, 70*$j);
 
       .line-#{$j} {
-
+        $descr: nth($users_progress, $j);
         @for $k from 1 through $sub_count {
           $elem: nth($sub_categ, $k);
 
@@ -150,27 +152,39 @@ $chart_color: orange;
           .chart-#{$k} {
             display: inline-block;
             width: #{$width}vw;
+            height: 20px;
             background-color: $color;
-
+            transition:  background-color 400ms ease-in-out;
+            position: relative;
+            border-right: 2px solid #000033;
             &:hover {
               background-color: lighten($color, 20%);
 
-              span{
-                display: inline;
-              }
+              &::after{
+                  background-color: #9898aa;
+                  border-radius: 3px;
+                  padding: 2px;
+                  $contend:nth($descr, $k)+' ' + $elem;
+                  top: -23px;
+                  left: 3px;
+                  position: absolute;
+                  content: '#{$contend}';
+                  min-width: 140px;
+                  @media screen and (max-width: map_get($size,'sm')) {
+                    top: 0;
+                    left: -80px;
+                    transform: rotate(-90deg);
+                   }
+                }
             }
 
             @media screen and (max-width: map_get($size,'sm')) {
               display: block;
               height: #{$width}vh;
               width: 20px;
+              border-right: none;
+              border-bottom: 2px solid #000033;
             }
-
-            &:after {
-              content: '#{$elem}';
-              padding-left: 2%;
-            }
-
 
           }
           }
@@ -200,7 +214,7 @@ $chart_color: orange;
 }
 
 /*change the with*/
-
+@debug $max_data;
 .axis{
   @media screen and (max-width:map_get($size,'sm')){
     display: none;
@@ -221,14 +235,16 @@ $chart_color: orange;
 /*change the number of points*/
 @for $i from 1 to $pointer_count{
   $step: ($max_data/8);
+
   .num-#{$i}:after {
     @if($i==1) {
       visibility: hidden;
     }
-    $number: floor($step*(-1+$i));
+    $number: floor($step*($i));
     content: '#{$number}';
     display: inline-block;
     padding: 12px 5px 0 0;
+
   }
 
 }

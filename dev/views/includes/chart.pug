@@ -1,9 +1,8 @@
-- var users_progress={'1':['task resolved', 'project resolved'], '2':['critical bag fixed', 'bag fixed'], '3':['world save','villains defeated']}
+- var users_progress={'1':['task resolved', 'project resolved'], '2':['critical bug fixed', 'bug fixed'], '3':['worlds saved','villains defeated']}
 
 mixin displey_chart(values)
     - for(let i=1;i<=values.length;i++){
         div(class="inline chart-" + i title=values[i - 1])
-            span=values[i - 1]
     - }
 
 h1#progress Our progress

@@ -1,6 +1,6 @@
 /*List for media*/
 
-$size: ("sm": 500px, 'md': 768px, 'md_p': 850px,);
+$size: ("sm": 500px, 'md': 768px, 'md_p': 850px);
 
 
 /*Common variables*/
@@ -26,12 +26,9 @@ $button_color: #59574b;
           darken($color, 80%));
 }
 
-html {
-  height: 100% ;
-}
 
 body {
-  width: 100%;
+
   @include gradient_background_darken($main_background);
   font-family: $main_font;
   margin: 0 0 20px 0;
@@ -92,6 +89,11 @@ button{
   &-colunm{
     display: flex;
     flex-flow: column;
+  }
+
+  &-wrap{
+    display: flex;
+    flex-flow: row wrap;
   }
 
   &-between{
